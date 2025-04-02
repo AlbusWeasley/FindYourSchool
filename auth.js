@@ -25,3 +25,6 @@ module.exports = async (req, res) => {
         return res.json({ token });
     }
 };
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("MongoDB 连接成功"))
+    .catch(err => console.error("MongoDB 连接失败:", err));
