@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>学校评价查询</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>学校评价查询</h1>
+    <div id="school-list"></div>
+
+    <script>
+        async function loadSchools() {
+            const response = await fetch("/api/schools");
+            const schools = await response.json();
+            document.getElementById("school-list").innerHTML = schools.map(school => `
+                <div class="school">
+                    <h2><a href="school.html?id=${school._id}">${school.name}</a></h2>
+                    <p>评分: ${school.rating} ⭐（${school.reviewCount} 条评价）</p>
+                </div>
+            `).join("");
+        }
+        loadSchools();
+    </script>
+</body>
+</html>
